@@ -1,0 +1,102 @@
+# AI Agricultural Robot Configuration
+
+# System Settings
+system:
+  debug_mode: true
+  log_level: INFO
+  data_directory: "data"
+  models_directory: "models"
+
+# Drone Settings
+drone:
+  default_altitude: 20  # meters
+  max_flight_time: 25   # minutes
+  return_battery_threshold: 20  # percentage
+  image_capture_interval: 5  # seconds
+  survey_speed: 5  # meters per second
+  camera:
+    resolution: [1920, 1080]
+    format: "jpg"
+    quality: 90
+
+# ML Model Settings
+ml_model:
+  disease_detection:
+    model_file: "disease_classifier.h5"
+    input_size: [224, 224]
+    confidence_threshold: 0.85
+    supported_diseases:
+      - leaf_blight
+      - leaf_spot
+      - rust
+      - powdery_mildew
+
+# Soil Analysis Settings
+soil_sensors:
+  reading_interval: 300  # seconds
+  thresholds:
+    moisture:
+      min: 20
+      max: 80
+      optimal: 50
+    ph:
+      min: 5.5
+      max: 7.5
+      optimal: 6.5
+    nitrogen:
+      min: 0
+      max: 100
+      optimal: 60
+    phosphorus:
+      min: 0
+      max: 100
+      optimal: 45
+    potassium:
+      min: 0
+      max: 100
+      optimal: 50
+    temperature:
+      min: 10
+      max: 35
+      optimal: 25
+
+# Image Processing Settings
+image_processing:
+  cache_enabled: true
+  cache_max_size: 1000  # MB
+  enhancement:
+    contrast_limit: 2.0
+    grid_size: [8, 8]
+  vegetation_detection:
+    hsv_green_lower: [35, 30, 30]
+    hsv_green_upper: [85, 255, 255]
+
+# Firebase Configuration
+firebase:
+  project_id: "agribot-project"
+  storage_bucket: "agribot-project.appspot.com"
+  collection_names:
+    soil_data: "soil_readings"
+    disease_detection: "disease_detections"
+    drone_telemetry: "drone_telemetry"
+
+# Alert Settings
+alerts:
+  enabled: true
+  notification_methods:
+    - email
+    - mobile_app
+  thresholds:
+    disease_confidence: 0.85
+    soil_moisture_critical: 15
+    battery_low: 20
+
+# Mobile App Integration
+mobile_app:
+  api_version: "v1"
+  update_interval: 60  # seconds
+  features:
+    - live_monitoring
+    - alert_notifications
+    - report_generation
+    - manual_control
